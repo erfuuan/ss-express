@@ -1,14 +1,12 @@
 import express, { Application, Request, Response } from 'express';
 import path from 'path';
-import helmet from 'helmet';
 import morgan from 'morgan';
-import cookieParser from 'cookie-parser';
+import cors from 'cors'
 
 const app: Application = express();
 
-app.use(helmet());
 app.use(morgan('dev'));
-app.use(cookieParser());
+app.use(cors())
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -25,7 +23,7 @@ app.get('/events', (req: Request, res: Response): void => {
   };
 
   // Send a message every 5 seconds
-  const intervalId = setInterval(sendEvent, 5000);
+  const intervalId = setInterval(sendEvent, 1000);
 
   // Send an initial message
   sendEvent();
