@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSE Example</title>
+</head>
+<body>
+  <h1>Server-Sent Events</h1>
+  <ul id="messages"></ul>
+
+  <script>
+    if (typeof(EventSource) !== "undefined") {
+      const source = new EventSource('/events');
+      source.onmessage = function(event) {
+        const newElement = document.createElement("li");
+        newElement.textContent = event.data;
+        document.getElementById("messages").appendChild(newElement);
+      };
+    } else {
+      document.getElementById("messages").innerHTML = "Your browser does not support SSE.";
+    }
+  </script>
+</body>
+</html>
